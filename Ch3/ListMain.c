@@ -1,51 +1,48 @@
 #include <stdio.h>
 #include "ArrayList.h"
 
-int main(void)
+int main()
 {
-    int i, sum = 0;
-    LData data;
-    
     List list;
+    LData data;
     ListInit(&list);
 
-    for(i=0; i<9; i++)
-    {
-        data = i+1;
-        LInsert(&list, data);
-    }
+    LInsert(&list, 11); LInsert(&list, 11);
+    LInsert(&list, 22); LInsert(&list, 22);
+    LInsert(&list, 33);
 
-    
+    printf("현재 저장된 데이터 수: %d \n", LCount(&list));
+
     if(LFirst(&list, &data))
     {
-        sum += data;
+        printf("%d ", data);
+
         while(LNext(&list, &data))
-        {
-            sum += data;
-        }
-        printf("총 합: %d \n", sum);   
+            printf("%d ", data);
     }
-    
+    printf("\n\n");
+
     if(LFirst(&list, &data))
     {
-        if((data % 2 == 0) || (data % 3 == 0))
+        if(data==2)
             LRemove(&list);
-        
         while(LNext(&list, &data))
         {
-            if((data % 2 == 0) || (data % 3 == 0))
+            if(data==22)
                 LRemove(&list);
         }
     }
 
+    printf("현재 데이터 수: %d \n", LCount(&list));
+    
     if(LFirst(&list, &data))
-    {    
+    {
         printf("%d ", data);
         
         while(LNext(&list, &data))
             printf("%d ", data);
-        printf("\n");
     }
+    printf("\n\n");
 
     return 0;
 }
